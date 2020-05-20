@@ -11,7 +11,7 @@ describe MailgunRails::Deliverer do
     let(:mailgun_client) { double(MailgunRails::Client) }
 
     before(:each) do
-      MailgunRails::Client.stub(:new).with(api_key, domain, true).and_return mailgun_client
+      MailgunRails::Client.stub(:new).with(api_key, domain, true, nil).and_return mailgun_client
     end
 
     it 'should invoke mailgun message transforming the basic email properties' do
