@@ -10,5 +10,15 @@ describe MailgunRails::Client do
       RestClient::Request.stub(:execute).with({ method: :post, url: expected_url, payload: { foo: :bar }, verify_ssl: true})
       client.send_message foo: :bar
     end
+
+    context "with custom api host" do
+      let(:client){MailgunRails::Client.new(:some_api_key, :some_domain, true, 'api.eu.mailgun.net')}
+
+      it 'should make a POST rest request passing the parameters to the custom mailgun end point' do
+        expected_url = "https://api:some_api_key@api.eu.mailgun.net/v3/some_domain/messages"
+        RestClient::Request.stub(:execute).with({ method: :post, url: expected_url, payload: { foo: :bar }, verify_ssl: true})
+        client.send_message foo: :bar
+      end
+    end
   end
 end
