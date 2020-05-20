@@ -15,6 +15,10 @@ module MailgunRails
       self.settings[:api_key]
     end
 
+    def api_host
+      self.settings[:api_host]
+    end
+
     def verify_ssl
       #default value = true
       self.settings[:verify_ssl] != false
@@ -126,7 +130,7 @@ module MailgunRails
     end
 
     def mailgun_client
-      @maingun_client ||= Client.new(api_key, domain, verify_ssl)
+      @maingun_client ||= Client.new(api_key, domain, verify_ssl, api_host)
     end
   end
 end
